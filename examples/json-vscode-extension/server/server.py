@@ -138,7 +138,7 @@ def _validate_ilo(ls, text_doc):
 
             dGraph = Graph()
             dGraph.parse(data=onto)
-            dGraph.parse("http://OHIO:7200/repositories/SHACLTest/rdf-graphs/service?default")
+            dGraph.parse("http://www.w3id.org/tsso")
             sGraph = shaclService.getShapesGraph()
 
             validationResult = SHACLFramework.validateContent(dGraph, sGraph)
@@ -189,7 +189,7 @@ def completions(params: Optional[CompletionParams] = None) -> CompletionList:
         # full IRI -> Short
         # items=[CompletionItem(label=x, insert_text=x[x.rindex("#")+1:])for x in classesList]
         # short -> Short
-        items=[CompletionItem(label=" "+x[x.rindex("#")+1:])for x in itemsKG]
+        items=[CompletionItem(label=" #"+x[x.rindex("#")+1:])for x in itemsKG]
         # items=[
         #     CompletionItem(label='"'),
         #     CompletionItem(label='['),
