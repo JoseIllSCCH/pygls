@@ -30,7 +30,7 @@ from pygls.server import StdOutTransportAdapter
 from pygls.workspace import Document, Workspace
 
 from ...server import (
-    JsonLanguageServer,
+    ILOGraphLanguageServer,
     completions,
     did_close,
     did_open,
@@ -44,7 +44,7 @@ fake_document_content = 'text'
 fake_document = Document(fake_document_uri, fake_document_content)
 
 
-server = JsonLanguageServer('test-json-server', 'v1')
+server = ILOGraphLanguageServer('test-json-server', 'v1')
 server.publish_diagnostics = Mock()
 server.show_message = Mock()
 server.show_message_log = Mock()

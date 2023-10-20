@@ -1,0 +1,55 @@
+{
+	// Place your completions-sample workspace snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and 
+	// description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope 
+	// is left empty or omitted, the snippet gets applied to all languages. The prefix is what is 
+	// used to trigger the snippet and the body will be expanded and inserted. Possible variables are: matchingClass
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. 
+	// Placeholders with the same ids are connected.
+	// Example:
+	// "Print to console": {
+	// 	"scope": "javascript,typescript",
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+	// }
+	"Create New ILO-instance": {
+		"prefix": "new ILO-template",
+		"body": [
+			"$LINE_COMMENT ILO Resources",
+			"$LINE_COMMENT Resources define the classes and elements that a diagram models.",
+			"$LINE_COMMENT A resource is defined only once in an Ilograph diagram, it can appear in multiple perspectives",
+			"resources: ",
+			"$LINE_COMMENT default schema classes",
+			"- name: $1",
+			"  subtitle: ${2:Add a description of the new class resource}", 
+			"  abstract: true",
+			"\n",
+			"$LINE_COMMENT default schema instances",
+			"- name: $3",
+			"  instanceOf: $4",
+			"  subtitle: ${5:Add description of the new instance}",
+			"\n",
+			"$LINE_COMMENT ILO perspectives",
+			"$LINE_COMMENT Perspectives provides a unique way to look at the resources in a diagram and the relations between them ",
+			"perspectives: ",
+			"- name: $6",
+			"$LINE_COMMENT default relations ",
+			"  relations:", 
+			"  - label: $7",
+			"    from: $8",
+			"    to: $9"
+		],
+		"description": "Creates a simple template of an ILOgraph document file."
+	}
+	//# ILO Resources
+	//# Resources define the classes and elements that a diagram models.
+	//# A resource is defined only once in an Ilograph diagram, it can appear in multiple perspectives
+	//# default schema classes  
+	//# default schema instances
+	//# ILO perspectives
+	//# Perspectives provides a unique way to look at the resources in a diagram and the relations between them 
+	//# default relations    
+}

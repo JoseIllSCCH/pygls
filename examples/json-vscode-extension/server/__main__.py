@@ -17,7 +17,7 @@
 import argparse
 import logging
 
-from .server import json_server
+from .server import iloGraph_server
 
 logging.basicConfig(filename="pygls.log", level=logging.DEBUG, filemode="w")
 
@@ -49,11 +49,11 @@ def main():
     args = parser.parse_args()
 
     if args.tcp:
-        json_server.start_tcp(args.host, args.port)
+        iloGraph_server.start_tcp(args.host, args.port)
     elif args.ws:
-        json_server.start_ws(args.host, args.port)
+        iloGraph_server.start_ws(args.host, args.port)
     else:
-        json_server.start_io()
+        iloGraph_server.start_io()
 
 
 if __name__ == '__main__':

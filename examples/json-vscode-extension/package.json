@@ -13,10 +13,13 @@
     "Other"
   ],
   "activationEvents": [
-    "onLanguage:json"
+    "onLanguage:yaml"
   ],
   "contributes": {
-    "commands": [
+    "commands": [{
+      "command": "validateNow",
+      "title": "SHACL Validation"
+    },
       {
         "command": "countDownBlocking",
         "title": "Count down 10 seconds [Blocking]"
@@ -60,7 +63,35 @@
           "default": "You can override this message."
         }
       }
-    }
+    },
+    "snippets": [
+			{
+				"language": "yaml",
+				"path": "./.vscode/ILO-Class.code-snippets"
+			},
+			{
+				"language": "yaml",
+				"path": "./.vscode/ILO-Instance.code-snippets"
+			},
+			{
+				"language": "yaml",
+				"path": "./.vscode/ILO-startTemplate.code-snippets"
+			},
+			{
+				"language": "yaml",
+				"path": "./.vscode/ILO-Relation.code-snippets"
+			},{
+				"language": "yaml",
+				"path": "./.vscode/ILO-PartialTemplate.code-snippets"
+			}
+		],
+    "grammars": [
+      {
+        "language": "yaml",
+        "scopeName": "source.yaml.ilograph",
+        "path": "./yamlLib/base/ILOExtensionGrammar.json"
+      }
+    ]
   },
   "main": "./client/out/extension",
   "scripts": {

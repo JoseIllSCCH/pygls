@@ -1,5 +1,5 @@
 from pygls.server import LanguageServer
-from lsprotocol.types import (
+from lsprotocol import (
     TEXT_DOCUMENT_COMPLETION,
     CompletionItem,
     CompletionList,

@@ -1,0 +1,118 @@
+resources:
+- name: User
+  description: User that can access directly to a component or component's functionality.
+  icon: AWS/_General/Users.svg
+  
+- name: Component Solution
+  abstract: true
+  description: A representation of a system which describes its components their ports, api and  connections 
+  
+- name: Component
+  abstract: true
+  subtitle: Component
+  color: Gray
+  style: plural
+  icon: Networking/workstation.svg
+  
+- name: Port
+  abstract: true
+  subtitle: Port  
+  color: navy
+  icon:  AWS/Mobile/API-Gateway.svg
+
+- name: Service
+  abstract: true
+  subtitle: Service
+  icon: Networking/cloud-server.svg
+    
+- name: API
+  abstract: true
+  subtitle: API
+  color: Firebrick
+  icon: AWS/Mobile/API-Gateway_Endpoint.svg
+  
+- name: Protocol
+  abstract: true
+  subtitle: Protocol
+  color: Purple
+  description: This is a description
+  icon: AWS/IoT/IoT_HTTP-protocol.sv
+  
+- name : Connection
+  abstract: true
+  icon: Networking/router.svg
+  children: 
+    - name: source
+    - name: destination
+    - name: HTTP
+      instanceOf: Protocol 
+  
+- name : HUI
+  abstract: true
+  icon: AWS/IoT/IoT-Button.svg
+
+- name : Capability
+  abstract: true
+  icon: Networking/router.svg  
+
+  
+- name: Solution1 
+  instanceOf: Component Solution
+  children: 
+  - name: Comp1
+    instanceOf: Component
+    children: 
+    - name: Port1
+      instanceOf: Port
+    - name: REST API
+      instanceOf: API
+      description: This is a description of the API
+  - name: Comp2
+    instanceOf: Component
+    children: 
+    - name: Port1
+      instanceOf: Port
+    - name: Button1
+      instanceOf: HUI
+    - name: Interface1 
+      instanceOf: HUI
+  - name: Comp3
+    instanceOf: Component
+    children: 
+    - name: Port1
+      instanceOf: Port
+    - name: Interface1 
+      instanceOf: HUI   
+    - name: Special-Service
+      instanceOf: Service
+  - name: Connection1
+    instanceOf: Connection
+  - name: Connection2
+    instanceOf: Connection
+     
+    
+    
+perspectives:
+- name: uses
+  relations: 
+    - from: Comp1/Port1
+      to: Connection1/HTTP
+      label: source
+    - from: Comp2/Port1
+      to: Connection1/HTTP
+      label: destination
+    - from: REST API
+      to: Port1
+      label: exposed 
+    - from: User
+      to: Comp2/Button1,Comp2/Interface1,REST API,Comp3/Interface1
+    - from: Comp3/Port1
+      to: Connection2/HTTP
+      label: source
+    - from: Comp1/Port1
+      to: Connection2/HTTP
+      label: destination
+    - from: Comp3/Special-Service
+      to: Comp3/Port1
+      label: exposes
+

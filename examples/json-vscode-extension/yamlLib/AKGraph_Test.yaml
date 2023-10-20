@@ -1,0 +1,97 @@
+resources:
+- name: Users
+  subtitle: Users of the system
+  color: Gray
+  style: plural
+  icon: Networking/user.svg
+  abstract: true
+  
+# default schema classes  
+- name: System
+  abstract: true
+  icon: AWS/Business Apps/Business-Applications.svg
+- name: Component
+  abstract: true
+  icon: AWS/IoT/IoT_Generic.svg
+- name: Capability
+  abstract: true
+  icon: AWS/IoT/IoT_Action.svg
+- name: ComponentSolution
+  abstract: true
+  subtitle: Solution Structure 
+  color: navy
+- name: TechnicalStandard
+  abstract: true
+- name: Requirement
+  abstract: true
+
+# instances
+- name: System_1
+  instanceOf: System
+
+
+- name: ComponentSolution_0
+  instanceOf: ComponentSolution
+  children: 
+  - name: Component_1
+    instanceOf: Component
+  - name: Component_2
+    instanceOf: Component
+    
+- name: IEC_62443-4-2
+  instanceOf: TechnicalStandard
+  children:
+  - name: CR1.1
+    instanceOf: Requirement
+    description: |- 
+      Human user identification and authentication
+  - name: CR1.2
+    instanceOf: Requirement
+  - name: CR1.3
+    instanceOf: Requirement
+    
+- name: Capability_1
+  instanceOf: Capability
+  description: |-
+    Authentication of human user.
+- name: Capability_2
+  instanceOf: Capability
+  description: |- 
+    Identification of human user.
+- name: Capability_3
+  instanceOf: Capability
+    
+    
+
+perspectives:
+- name: System
+  color: royalblue
+  relations:
+  - from: System_1
+    to: ComponentSolution_0
+    label: has Component Solution
+  - from: Component_1
+    to: Capability_1,Capability_2
+    label: has Capability
+  - from: Component_2
+    to: Capability_2
+    label: has Capability
+- name: Publication
+  color: Salmon
+  relations: 
+  - from: IEC_62443-4-2
+    to: CR1.1, CR1.2, CR1.3
+    label: contains
+  - from: CR1.1
+    to: Capability_1,Capability_2
+    label: demands capability
+  - from: CR1.2
+    to: Capability_2
+    label: demands capability
+  - from: CR1.3
+    to: Capability_3,Capability_1
+    label: demands capability
+- name: Overview
+  extends: System,Publication
+    
+  # Add 'relations' or 'sequence' here

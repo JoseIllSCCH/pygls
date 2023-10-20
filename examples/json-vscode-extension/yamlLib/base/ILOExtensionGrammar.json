@@ -1,0 +1,56 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"patterns": [
+		{
+			"include": "#keywords"
+		},
+		{
+			"include": "#KGClass"
+		},
+		{
+			"include": "#KGOP"
+		},
+		{
+			"include": "#KGInstance"
+		},
+		{
+			"include": "source.yaml"
+		}
+	],
+	"repository": {
+		"keywords": {
+			"patterns": [{
+				"name": "keyword.control.ilo",
+				"match": "\\b([Tt]rue|[Ff]alse)\\b"
+			}]
+		},
+		"KGClass": {
+			"name": "string.quoted.double.ilo",
+			"begin": "instanceOf:(\\s)*",
+			"end": "(\\s)*(\\r|\\n)",
+			"contentName":"entity.name.class",
+			"beginCaptures": {
+				"0": { "name": "entity.name.tag.yaml" }
+			  }
+		},
+		"KGOP": {
+			"name": "string.quoted.double.ilo",
+			"begin": "label:(\\s)*",
+			"end": "(\\s)*(\\r|\\n)",
+			"contentName":"entity.name.function",
+			"beginCaptures": {
+				"0": { "name": "entity.name.tag.yaml" }
+			  }
+		},
+		"KGInstance": {
+			"name": "string.quoted.double.ilo",
+			"begin": "(from|to):(\\s)*",
+			"end": "(\\s)*(\\r|\\n)",
+			"contentName":"entity.name.type",
+			"beginCaptures": {
+				"0": { "name": "entity.name.tag.yaml" }
+			  }
+		}
+	},
+	"scopeName": "source.yaml.ilograph"
+}

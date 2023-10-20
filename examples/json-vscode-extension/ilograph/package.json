@@ -1,0 +1,25 @@
+{
+  "name": "ilograph",
+  "displayName": "ILOGraphExtension",
+  "description": "Provides syntax highlight for elements that are retrieved from the TSSO",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.82.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "ilo",
+      "aliases": ["yaml", "ilo"],
+      "extensions": [".yaml"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "ilo",
+      "scopeName": "source.yaml",
+      "path": "./syntaxes/ilo.tmLanguage.json"
+    }]
+  }
+}
