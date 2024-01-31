@@ -55,9 +55,9 @@
     ],
     "configuration": {
       "type": "object",
-      "title": "Json Server Configuration",
+      "title": "Server Configuration",
       "properties": {
-        "jsonServer.exampleConfiguration": {
+        "server.exampleConfiguration": {
           "scope": "resource",
           "type": "string",
           "default": "You can override this message."

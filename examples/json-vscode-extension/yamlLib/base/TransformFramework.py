@@ -66,7 +66,9 @@ class IBase:
         self.description = ""
         self.attributes = []
         self.ontoReference = {}
-        self.ontoNameSpace = {}
+        self.ontoNameSpace = ""
+        self.origin = ''
+        self.replacement = 'None'
 
 # generic node that represents classes or instances in both worlds
 # these nodes can be connected among each other and be described by attributes
@@ -99,29 +101,7 @@ class IRelationship(IBase):
     def isWrapper(self):
         return False
 
-# a wrapper of a relationship
-# this means that original relationship will be replaced by the defined replacement
-# can be replaced by a tool specifc construct that maps to a different kind of construct
-
-
-class IRelationshipWrapper(IRelationship):
-    def __init__(self, replace):
-        super().__init__()
-        self.origin = ''
-        self.replace = replace
-
-    def isWrapper(self):
-        return True
-
-    def getOrigin(self):
-        return self.origin
-
-    def getReplacement(self):
-        return self.replace
-
 # attribute of IBase elements
-
-
 class IAttribute(IBase):
     def __init__(self, value={}):
         # literal value
@@ -146,8 +126,10 @@ class IMetaNode(INode):
 
 
 class IMetaAttribute(IAttribute):
-    def __init__(self, value={}):
+    def __init__(self, value={},replace=''):
         super().__init__(value)
+        self.replace=replace
+
 
 # Object used to connect main objects to meta objects which should not be considered when materializing
 
@@ -157,7 +139,7 @@ class IMetaRelationship(IRelationship):
         super().__init__()
 
 # Defines methods to create ontological elements
-class IOntoFactory:
+class IIRtoOntoTransformer:
 
     def __init__(self, baseNS):
         self.concepts = []
@@ -169,6 +151,7 @@ class IOntoFactory:
         self.initDefaultNS()
         self.initDefautAnnotations()
         self.service = IOntoService()
+        self.baseNS= baseNS
 
     def initDefaultNS(self):
         # bind an RDFLib-provided namespace to a prefix
@@ -203,7 +186,7 @@ class IOntoFactory:
             instanceRef = ns[i.name]
 
             for att in i.attributes:
-                mappedAtt = baseFactory.resolveMetaRelation(i, att, self)
+                mappedAtt = baseFactory.resolveMetaRelation(i, att)
                 self.processAttribute(instanceRef, ns, att)
 
         for rel in baseFactory.relations:
@@ -257,30 +240,6 @@ class IOntoFactory:
     def getValueFor(self, subjectIRI=None, opIRI=RDF.value):
         return self.g.value(subjectIRI, opIRI)
 
-
-class Mapper:
-
-    def __init__(self):
-        self.ontoFactory = IOntoFactory()
-        self.baseFactory = IIntermediateModel()
-
-    def ontoToINode(self):
-        pass
-
-    def ontoToIRelation(self):
-        pass
-
-    def ontoToIAttribute(self):
-        pass
-
-    def baseToIOntoConcept(self):
-        pass
-
-    def baseToIOntoInstance(self):
-        pass
-
-    def baseToIOntoRelation(self):
-        pass
 
 
 def stringToList(s, separator=','):

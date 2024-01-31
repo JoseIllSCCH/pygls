@@ -3,6 +3,8 @@
 	"patterns": [
 		{
 			"include": "#keywords"
+		},{
+			"include": "#KGClass0"
 		},
 		{
 			"include": "#KGClass"
@@ -23,6 +25,14 @@
 				"name": "keyword.control.ilo",
 				"match": "\\b([Tt]rue|[Ff]alse)\\b"
 			}]
+		},		"KGClass0": {
+			"name": "string.quoted.double.ilo",
+			"begin": "name:(\\s)*#",
+			"end": "(\\s)*(\\r|\\n)",
+			"contentName":"entity.name.class",
+			"beginCaptures": {
+				"0": { "name": "entity.name.tag.yaml" }
+			  }
 		},
 		"KGClass": {
 			"name": "string.quoted.double.ilo",

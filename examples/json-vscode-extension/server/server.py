@@ -78,7 +78,7 @@ iloIR = ILOTrans.ILOGraphToIntermediateModel()
 
 
 # Generic interface to transform IR to ontology
-irTransformation = ILOTrans.IntermediateToOntoFactory()
+irTransformation = ILOTrans.DefaultIRToOntoTransformer()
 
 # SHACL Service
 shaclService = SHACLFramework.LocalSHACLService()
